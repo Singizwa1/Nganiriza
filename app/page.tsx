@@ -2,10 +2,10 @@
 
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import {
   MessageCircle,
   TrendingUp,
-  Smile,
   Calendar,
   Brain,
   Gamepad2,
@@ -16,6 +16,7 @@ import {
   Moon,
   Sun,
   Star,
+  Menu,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -68,13 +69,45 @@ export default function Home() {
               Contact
             </a>
           </nav>
-          <button
-            onClick={() => setIsDark(!isDark)}
-            className="p-2 rounded-lg border border-border hover:bg-muted transition-colors"
-            aria-label="Toggle theme"
-          >
-            {mounted && (isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />)}
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsDark(!isDark)}
+              className="p-2 rounded-lg border border-border hover:bg-muted transition-colors"
+              aria-label="Toggle theme"
+            >
+              {mounted && (isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />)}
+            </button>
+
+            <Sheet>
+              <SheetTrigger asChild>
+                <button
+                  className="md:hidden p-2 rounded-lg border border-border hover:bg-muted transition-colors"
+                  aria-label="Open navigation menu"
+                >
+                  <Menu className="w-5 h-5" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-72">
+                <SheetHeader>
+                  <SheetTitle>Menu</SheetTitle>
+                </SheetHeader>
+                <nav className="mt-8 flex flex-col gap-4">
+                  <a href="#home" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    Home
+                  </a>
+                  <a href="#about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    About Us
+                  </a>
+                  <a href="#features" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    Features
+                  </a>
+                  <a href="#contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    Contact
+                  </a>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </header>
 

@@ -7,7 +7,11 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Nganiriza',
+  title: {
+    default: 'Nganiriza',
+    template: '%s | Nganiriza',
+  },
+  applicationName: 'Nganiriza',
   description: 'Mental wellness platform',
   icons: {
     icon: [
