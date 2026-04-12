@@ -23,7 +23,46 @@ import { useEffect, useState } from 'react';
 export default function Home() {
   const [isDark, setIsDark] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const currentYear = new Date().getFullYear();
+
+  const testimonials = [
+    {
+      message:
+        'Nganiriza helped me understand my emotions better. The mood tracking feature is incredibly insightful, and the AI support feels genuinely caring.',
+      name: 'Sarah M.',
+      role: 'Mental Health Advocate',
+    },
+    {
+      message:
+        "As someone with anxiety, Nganiriza's CBT techniques integrated into the platform have been life-changing. I feel more in control of my thoughts.",
+      name: 'James L.',
+      role: 'Wellness Enthusiast',
+    },
+    {
+      message:
+        "I love how Nganiriza makes mental wellness fun with the brain games. It's helped me build a consistent daily routine and I feel happier.",
+      name: 'Emma K.',
+      role: 'Student & App User',
+    },
+  ];
+
+  const decorativeBrains = [
+    { top: '6%', left: '6%', size: '1rem', delay: '0s', duration: '4.2s' },
+    { top: '10%', left: '24%', size: '1.2rem', delay: '0.6s', duration: '4.8s' },
+    { top: '8%', left: '44%', size: '1.1rem', delay: '1.3s', duration: '5.1s' },
+    { top: '12%', left: '66%', size: '1.4rem', delay: '0.9s', duration: '4.6s' },
+    { top: '9%', left: '86%', size: '1rem', delay: '1.8s', duration: '5.3s' },
+    { top: '34%', left: '14%', size: '1.5rem', delay: '0.4s', duration: '4.4s' },
+    { top: '38%', left: '36%', size: '1.2rem', delay: '1.1s', duration: '5s' },
+    { top: '32%', left: '58%', size: '1.6rem', delay: '0.7s', duration: '4.5s' },
+    { top: '40%', left: '80%', size: '1.3rem', delay: '1.6s', duration: '5.2s' },
+    { top: '62%', left: '8%', size: '1.2rem', delay: '1.4s', duration: '4.7s' },
+    { top: '68%', left: '28%', size: '1.6rem', delay: '0.3s', duration: '4.3s' },
+    { top: '64%', left: '48%', size: '1.3rem', delay: '1.9s', duration: '5.4s' },
+    { top: '70%', left: '68%', size: '1.5rem', delay: '0.8s', duration: '4.9s' },
+    { top: '66%', left: '88%', size: '1.1rem', delay: '1.2s', duration: '4.6s' },
+  ];
 
   const handleLearnMoreClick = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -43,6 +82,14 @@ export default function Home() {
       document.documentElement.classList.remove('dark');
     }
   }, [isDark, mounted]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
 
   return (
     <div id="home" className="min-h-screen bg-background">
@@ -113,16 +160,33 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+        <div className="absolute inset-0 pointer-events-none z-0">
+          {decorativeBrains.map((brain, index) => (
+            <span
+              key={`hero-bg-brain-${index}`}
+              className="absolute opacity-20 animate-[brainDrift_5s_ease-in-out_infinite]"
+              style={{
+                top: brain.top,
+                left: brain.left,
+                fontSize: brain.size,
+                animationDelay: brain.delay,
+                animationDuration: brain.duration,
+              }}
+            >
+              🧠
+            </span>
+          ))}
+        </div>
         <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-8 inline-block px-4 py-2 bg-accent/10 rounded-full border border-accent/20">
+          <div className="mb-8 inline-block px-4 py-2 bg-accent/10 rounded-full border border-accent/20 animate-[heroMessageFloat_5s_ease-in-out_infinite]">
             <span className="text-sm font-medium text-accent">Mental Wellness Made Simple</span>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 text-balance">
+          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 text-balance animate-[heroMessageFloat_6s_ease-in-out_infinite]">
             Your Daily Mental Wellness Companion
           </h1>
 
-          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto text-balance">
+          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto text-balance animate-[heroMessageFloat_7s_ease-in-out_infinite]">
             Track your mood, get support, and build a healthier mind with Nganiriza
           </p>
 
@@ -273,47 +337,32 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* Testimonial 1 */}
-            <Card className="p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-card border-border/50">
-              <div className="flex gap-1 mb-4">
+          <div className="max-w-xl mx-auto">
+            <Card className="p-4 md:p-5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-card border-border/50">
+              <div className="flex gap-1 mb-4 justify-center">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-accent text-accent" />
                 ))}
               </div>
-              <p className="text-muted-foreground mb-4 italic">
-                &quot;Nganiriza helped me understand my emotions better. The mood tracking feature is incredibly insightful, and the AI support feels genuinely caring.&quot;
+              <p className="text-muted-foreground mb-4 italic text-center text-sm md:text-base min-h-20 transition-all duration-500">
+                &quot;{testimonials[activeTestimonial].message}&quot;
               </p>
-              <p className="font-semibold text-foreground">Sarah M.</p>
-              <p className="text-sm text-muted-foreground">Mental Health Advocate</p>
-            </Card>
-
-            {/* Testimonial 2 */}
-            <Card className="p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-card border-border/50">
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+              <p className="font-semibold text-foreground text-center">{testimonials[activeTestimonial].name}</p>
+              <p className="text-sm text-muted-foreground text-center">{testimonials[activeTestimonial].role}</p>
+              <div className="mt-6 flex items-center justify-center gap-2" aria-label="Testimonial indicators">
+                {testimonials.map((testimonial, index) => (
+                  <button
+                    type="button"
+                    key={testimonial.name}
+                    className={`h-2.5 rounded-full transition-all duration-300 ${
+                      index === activeTestimonial ? 'w-6 bg-primary' : 'w-2.5 bg-border'
+                    }`}
+                    aria-label={`Show testimonial ${index + 1}`}
+                    onMouseEnter={() => setActiveTestimonial(index)}
+                    onClick={() => setActiveTestimonial(index)}
+                  />
                 ))}
               </div>
-              <p className="text-muted-foreground mb-4 italic">
-                &quot;As someone with anxiety, Nganiriza&apos;s CBT techniques integrated into the platform have been life-changing. I feel more in control of my thoughts.&quot;
-              </p>
-              <p className="font-semibold text-foreground">James L.</p>
-              <p className="text-sm text-muted-foreground">Wellness Enthusiast</p>
-            </Card>
-
-            {/* Testimonial 3 */}
-            <Card className="p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-card border-border/50">
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-accent text-accent" />
-                ))}
-              </div>
-              <p className="text-muted-foreground mb-4 italic">
-                &quot;I love how Nganiriza makes mental wellness fun with the brain games. It&apos;s helped me build a consistent daily routine and I feel happier.&quot;
-              </p>
-              <p className="font-semibold text-foreground">Emma K.</p>
-              <p className="text-sm text-muted-foreground">Student & App User</p>
             </Card>
           </div>
         </div>
