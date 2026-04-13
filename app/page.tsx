@@ -247,14 +247,6 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
-            <div className="space-y-4">
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground">Our Mission</h3>
-              <p className="text-muted-foreground leading-relaxed text-lg">
-                We break mental health stigma among youth by combining in-app wellbeing tools, community storytelling
-                spaces, and QR-code awareness campaigns so lived experience becomes leadership, education, and hope.
-              </p>
-             
-            </div>
 
             <div className="space-y-4">
               <h3 className="text-2xl md:text-3xl font-bold text-foreground">Our Vision</h3>
@@ -264,6 +256,16 @@ export default function Home() {
                 for resilience.
               </p>
             </div>
+            <div className="space-y-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground">Our Mission</h3>
+              <p className="text-muted-foreground leading-relaxed text-lg">
+                We break mental health stigma among youth by combining in-app wellbeing tools, community storytelling
+                spaces, and QR-code awareness campaigns so lived experience becomes leadership, education, and hope.
+              </p>
+             
+            </div>
+
+            
           </div>
         </div>
       </section>
