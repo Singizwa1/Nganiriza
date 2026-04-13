@@ -9,6 +9,7 @@ import {
   Calendar,
   Brain,
   Gamepad2,
+  Megaphone,
   Facebook,
   Twitter,
   Linkedin,
@@ -178,9 +179,9 @@ export default function Home() {
           ))}
         </div>
         <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-8 inline-block px-4 py-2 bg-accent/10 rounded-full border border-accent/20 animate-[heroMessageFloat_5s_ease-in-out_infinite]">
+          {/* <div className="mb-8 inline-block px-4 py-2 bg-accent/10 rounded-full border border-accent/20 animate-[heroMessageFloat_5s_ease-in-out_infinite]">
             <span className="text-sm font-medium text-accent">Mental Wellness Made Simple</span>
-          </div>
+          </div> */}
 
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 text-balance animate-[heroMessageFloat_6s_ease-in-out_infinite]">
             Your Daily Mental Wellness Companion
@@ -213,30 +214,54 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Us / Learn More Section */}
-      <section id="about" className="px-4 sm:px-6 lg:px-8 py-20 md:py-32 bg-card/70 border-y border-border/50 transition-colors duration-300">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              About Nganiriza
-            </h2>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              Nganiriza is dedicated to making mental health support accessible to everyone. We believe that mental wellness is a fundamental human right, and technology can be a powerful tool to help people understand themselves better, manage stress, and build resilience.
+      {/* About Us / Mission / Vision */}
+      <section
+        id="about"
+        className="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-20 md:py-28 bg-gradient-to-br from-primary/10 to-accent/10 border-y border-primary/20 transition-colors duration-300"
+      >
+        <div className="absolute inset-0 pointer-events-none z-0">
+          {decorativeBrains.map((brain, index) => (
+            <span
+              key={`about-bg-brain-${index}`}
+              className="absolute opacity-15 animate-[brainDrift_5.5s_ease-in-out_infinite]"
+              style={{
+                top: brain.top,
+                left: brain.left,
+                fontSize: brain.size,
+                animationDelay: brain.delay,
+                animationDuration: brain.duration,
+              }}
+            >
+              🧠
+            </span>
+          ))}
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto">
+          <div className="max-w-3xl mx-auto mb-14 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">About Nganiriza</h2>
+            <p className="text-lg text-muted-foreground leading-relaxed mx-auto">
+              Nganiriza is a youth-centered mental health movement and digital platform helping young adults (18-30)
+              heal out loud, reconnect with community, and lead change through lived experience.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
             <div className="space-y-4">
-              <h3 className="text-2xl font-semibold text-foreground">Our Mission</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Our mission is to democratize mental health support by combining AI technology with evidence-based therapeutic techniques. We aim to provide a safe, non-judgmental space where individuals can explore their emotions, track their mental health journey, and access tools to improve their wellbeing.
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground">Our Mission</h3>
+              <p className="text-muted-foreground leading-relaxed text-lg">
+                We break mental health stigma among youth by combining in-app wellbeing tools, community storytelling
+                spaces, and QR-code awareness campaigns so lived experience becomes leadership, education, and hope.
               </p>
+             
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-2xl font-semibold text-foreground">How We Help</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Through mood tracking, AI-powered emotional support, facial recognition for emotional patterns, and cognitive behavioral therapy techniques, Nganiriza helps users gain insights into their mental health. Our brain games and planning tools support daily wellness routines and cognitive development.
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground">Our Vision</h3>
+              <p className="text-muted-foreground leading-relaxed text-lg">
+                A world where mental health is openly discussed without shame, where every person - regardless of
+                diagnosis or treatment history - feels empowered to seek support, share their story, and be celebrated
+                for resilience.
               </p>
             </div>
           </div>
@@ -311,14 +336,15 @@ export default function Home() {
               </p>
             </Card>
 
-            {/* Testimonials */}
+            {/* Awareness Campaigns */}
             <Card className="p-6 hover:shadow-xl hover:border-accent/50 hover:-translate-y-1 transition-all duration-300 bg-card border-border/50 shadow-md">
               <div className="w-12 h-12 rounded-lg bg-accent/10 text-accent flex items-center justify-center mb-4">
-                <Star className="w-6 h-6" />
+                <Megaphone className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-semibold text-foreground mb-2">Testimonials</h3>
+              <h3 className="text-xl font-semibold text-foreground mb-2">Awareness Campaigns</h3>
               <p className="text-muted-foreground">
-                See how Nganiriza has helped users improve their mental well-being through real experiences.
+                Speak up. Seek support. Share your story. We run youth-focused, QR-code awareness campaigns that
+                challenge stigma and connect people to help.
               </p>
             </Card>
           </div>
@@ -381,7 +407,7 @@ export default function Home() {
                 <span className="font-bold text-foreground">Nganiriza</span>
               </div>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Nganiriza is focused on improving mental wellness through technology and awareness.
+                Nganiriza supports youth to heal, speak openly about mental health, and turn lived experience into community leadership.
               </p>
             </div>
 
@@ -392,6 +418,11 @@ export default function Home() {
                 <li>
                   <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
                     Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                    About Us
                   </a>
                 </li>
                 <li>
